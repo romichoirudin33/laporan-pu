@@ -85,27 +85,50 @@ class ReportActivityResource extends Resource
             ->columns([
                 TextColumn::make('name_project')
                     ->label('Data')
-                    ->sortable()
                     ->searchable(),
                 TextColumn::make('work_date')
                     ->label('Tanggal')
-                    ->sortable()
+                    ->formatStateUsing(fn (string $state): string => date('d M Y', strtotime($state)))
+                    ->alignCenter(true)
                     ->searchable(),
                 TextColumn::make('fiscal_year')
                     ->label('Tahun Anggaran')
+                    ->alignCenter(true)
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('location')
-                    ->label('Nama')
-                    ->words(5)
-                    ->sortable()
+                    ->label('Lokasi')
+                    ->words(4)
+                    ->wrap()
                     ->searchable(),
+                TextColumn::make('comments_count')
+                    ->label('Komentar')
+                    ->counts('comments')
+                    ->alignCenter(true),
             ])
             ->filters([
-                //
+                Tables\Filters\Filter::make('work_date')
+                    ->form([
+                        Forms\Components\DatePicker::make('created_from')
+                            ->label('Tanggal mulai'),
+                        Forms\Components\DatePicker::make('created_until')
+                            ->label('Tanggal akhir'),
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+                        return $query
+                            ->when(
+                                $data['created_from'],
+                                fn (Builder $query, $date): Builder => $query->whereDate('work_date', '>=', $date),
+                            )
+                            ->when(
+                                $data['created_until'],
+                                fn (Builder $query, $date): Builder => $query->whereDate('work_date', '<=', $date),
+                            );
+                    })
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()
+                    ->label('Kelola'),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
@@ -115,6 +138,7 @@ class ReportActivityResource extends Resource
     public static function getRelations(): array
     {
         return [
+            RelationManagers\CommentsRelationManager::class,
             RelationManagers\PreparatoryWorksRelationManager::class,
             RelationManagers\ConstructionWorksRelationManager::class,
             RelationManagers\MaterialsRelationManager::class,

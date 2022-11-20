@@ -17,7 +17,7 @@ class ConsultantResource extends Resource
 {
     protected static ?string $model = Consultant::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-document';
 
     protected static ?string $slug = 'konsultan';
 

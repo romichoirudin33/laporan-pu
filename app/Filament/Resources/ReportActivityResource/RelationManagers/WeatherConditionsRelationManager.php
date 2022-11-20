@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\ReportActivityResource\RelationManagers;
 
+use App\Models\User;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -54,13 +55,13 @@ class WeatherConditionsRelationManager extends RelationManager
             ->columns([
                 Tables\Columns\TextColumn::make('time')
                     ->label('Waktu'),
-                Tables\Columns\TextColumn::make('is_bright')
+                Tables\Columns\ToggleColumn::make('is_bright')
                     ->label('Cerah'),
-                Tables\Columns\TextColumn::make('is_cloudy')
+                Tables\Columns\ToggleColumn::make('is_cloudy')
                     ->label('Mendung'),
-                Tables\Columns\TextColumn::make('is_drizzle')
+                Tables\Columns\ToggleColumn::make('is_drizzle')
                     ->label('Gerimis'),
-                Tables\Columns\TextColumn::make('is_rain')
+                Tables\Columns\ToggleColumn::make('is_rain')
                     ->label('Hujan'),
                 Tables\Columns\TextColumn::make('earthquake')
                     ->label('Gempa'),
@@ -72,11 +73,14 @@ class WeatherConditionsRelationManager extends RelationManager
                 Tables\Actions\CreateAction::make(),
             ])
             ->actions([
-                Tables\Actions\EditAction::make()->label(''),
-                Tables\Actions\DeleteAction::make()->label(''),
+                Tables\Actions\EditAction::make()
+                    ->label(''),
+                Tables\Actions\DeleteAction::make()
+                    ->label(''),
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+                Tables\Actions\DeleteBulkAction::make()
+                    ->visible(fn (User $record): bool => $record->hasRole('super_admin')),
             ]);
     }
 }

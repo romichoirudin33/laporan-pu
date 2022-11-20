@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\SuperVisorResource\Pages;
 use App\Filament\Resources\SuperVisorResource\RelationManagers;
 use App\Models\SuperVisor;
+use BezhanSalleh\FilamentShield\Traits\HasPageShield;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
@@ -15,6 +16,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class SuperVisorResource extends Resource
 {
+
     protected static ?string $model = SuperVisor::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
