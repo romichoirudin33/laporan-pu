@@ -40,11 +40,14 @@ class OtherNotesRelationManager extends RelationManager
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('note')
-                    ->label('Catatan'),
+                    ->label('Catatan')
+                    ->wrap(),
                 Tables\Columns\TextColumn::make('note_of_construction')
-                    ->label('Catatan mengenai keselamatan konstruksi'),
+                    ->label('Catatan mengenai keselamatan konstruksi')
+                    ->wrap(),
                 Tables\Columns\TextColumn::make('job_plan')
-                    ->label('Rencana pelaksanaan pekerjaan'),
+                    ->label('Rencana pelaksanaan pekerjaan')
+                    ->wrap(),
             ])
             ->filters([
                 //

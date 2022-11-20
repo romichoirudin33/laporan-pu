@@ -40,11 +40,14 @@ class OthersRelationManager extends RelationManager
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('problem_happened')
-                    ->label('Masalah yang dihadapi'),
+                    ->label('Masalah yang dihadapi')
+                    ->wrap(),
                 Tables\Columns\TextColumn::make('follow_up')
-                    ->label('Tindak lanjut'),
+                    ->label('Tindak lanjut')
+                    ->wrap(),
                 Tables\Columns\TextColumn::make('suggestion')
-                    ->label('Saran'),
+                    ->label('Saran')
+                    ->wrap(),
             ])
             ->filters([
                 //

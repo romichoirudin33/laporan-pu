@@ -55,16 +55,21 @@ class WeatherConditionsRelationManager extends RelationManager
             ->columns([
                 Tables\Columns\TextColumn::make('time')
                     ->label('Waktu'),
-                Tables\Columns\ToggleColumn::make('is_bright')
-                    ->label('Cerah'),
-                Tables\Columns\ToggleColumn::make('is_cloudy')
-                    ->label('Mendung'),
-                Tables\Columns\ToggleColumn::make('is_drizzle')
-                    ->label('Gerimis'),
-                Tables\Columns\ToggleColumn::make('is_rain')
-                    ->label('Hujan'),
+                Tables\Columns\TextColumn::make('is_bright')
+                    ->label('Cerah')
+                    ->formatStateUsing(fn (string $state): string => $state == '1' ? 'Ya' : '-'),
+                Tables\Columns\TextColumn::make('is_cloudy')
+                    ->label('Mendung')
+                    ->formatStateUsing(fn (string $state): string => $state == '1' ? 'Ya' : '-'),
+                Tables\Columns\TextColumn::make('is_drizzle')
+                    ->label('Gerimis')
+                    ->formatStateUsing(fn (string $state): string => $state == '1' ? 'Ya' : '-'),
+                Tables\Columns\TextColumn::make('is_rain')
+                    ->label('Hujan')
+                    ->formatStateUsing(fn (string $state): string => $state == '1' ? 'Ya' : '-'),
                 Tables\Columns\TextColumn::make('earthquake')
-                    ->label('Gempa'),
+                    ->label('Gempa')
+                    ->wrap(),
             ])
             ->filters([
                 //

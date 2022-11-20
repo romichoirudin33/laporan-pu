@@ -26,13 +26,21 @@ class ManPowersRelationManager extends RelationManager
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('type')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('detail')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('amount')
-                    ->numeric(),
+                Forms\Components\Grid::make(2)->schema([
+                    Forms\Components\TextInput::make('type')
+                        ->label('Jenis Pekerjaan')
+                        ->required()
+                        ->maxLength(255),
+                    Forms\Components\TextInput::make('amount')
+                        ->label('Jumlah')
+                        ->numeric(),
+                ]),
+                Forms\Components\Grid::make(1)
+                    ->schema([
+                        Forms\Components\TextInput::make('detail')
+                            ->label('Detail Tenaga Kerja')
+                            ->maxLength(255),
+                    ]),
             ]);
     }
 
@@ -43,9 +51,11 @@ class ManPowersRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('type')
                     ->label('Jenis Pekerjaan'),
                 Tables\Columns\TextColumn::make('detail')
-                    ->label('Tenaga Kerja'),
+                    ->label('Tenaga Kerja')
+                    ->wrap(),
                 Tables\Columns\TextColumn::make('amount')
-                    ->label('Jumlah'),
+                    ->label('Jumlah')
+                    ->alignCenter(true),
             ])
             ->filters([
                 //
@@ -54,8 +64,10 @@ class ManPowersRelationManager extends RelationManager
                 Tables\Actions\CreateAction::make(),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\EditAction::make()
+                    ->label(''),
+                Tables\Actions\DeleteAction::make()
+                    ->label(''),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),

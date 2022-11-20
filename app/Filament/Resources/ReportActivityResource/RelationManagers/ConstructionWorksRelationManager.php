@@ -71,8 +71,10 @@ class ConstructionWorksRelationManager extends RelationManager
                 Tables\Actions\CreateAction::make(),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\EditAction::make()
+                    ->label(''),
+                Tables\Actions\DeleteAction::make()
+                    ->label(''),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
