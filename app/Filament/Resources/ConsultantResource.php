@@ -21,11 +21,11 @@ class ConsultantResource extends Resource
 
     protected static ?string $slug = 'konsultan';
 
-    protected static ?string $modelLabel = 'Konsultan';
+    protected static ?string $modelLabel = 'Konsultan Pengawas';
 
-    protected static ?string $pluralModelLabel = 'Konsultan';
+    protected static ?string $pluralModelLabel = 'Konsultan Pengawas';
 
-    protected static ?string $navigationLabel = 'Konsultan';
+    protected static ?string $navigationLabel = 'Konsultan Pengawas';
 
     protected static ?string $navigationGroup = 'Master Data';
 

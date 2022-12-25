@@ -46,16 +46,16 @@ class ReportActivityResource extends Resource
                                 Forms\Components\Textarea::make('location')
                                     ->label('Lokasi'),
                                 Forms\Components\TextInput::make('no_contractor')
-                                    ->label('No Kontraktor'),
+                                    ->label('Nomor Kontraktor'),
                             ])->columns(1),
                         Forms\Components\Fieldset::make('Waktu Proyek')
                             ->schema([
-                                Forms\Components\DatePicker::make('work_date')
-                                    ->label('Tanggal Kerja'),
                                 Forms\Components\DateTimePicker::make('execution_time')
-                                    ->label('Waktu Pelaksanaan'),
+                                    ->label('Tanggal Mulai'),
+                                Forms\Components\DatePicker::make('work_date')
+                                    ->label('Tanggal'),
                                 Forms\Components\DateTimePicker::make('maintenance_time')
-                                    ->label('Waktu Pemeliharaan'),
+                                    ->label('Tanggal Selesai'),
                                 Forms\Components\Select::make('fiscal_year')
                                     ->label('Tahun Anggaran')
                                     ->options(range(2021, Carbon::now()->year)),
@@ -63,11 +63,11 @@ class ReportActivityResource extends Resource
                         Forms\Components\Fieldset::make('Penanda Tangan')
                             ->schema([
                                 Forms\Components\Select::make('super_visor_id')
-                                    ->label('Pengawas')
+                                    ->label('PPK dan Pengawas DPUPR')
                                     ->options(SuperVisor::all()->pluck('name', 'id')->toArray())
                                     ->searchable(),
                                 Forms\Components\Select::make('consultant_id')
-                                    ->label('Konsultan')
+                                    ->label('Konsultan Pengawas')
                                     ->options(Consultant::all()->pluck('name', 'id')->toArray())
                                     ->searchable(),
                                 Forms\Components\Select::make('executor_id')
@@ -146,8 +146,8 @@ class ReportActivityResource extends Resource
             RelationManagers\ManPowersRelationManager::class,
             RelationManagers\WeatherConditionsRelationManager::class,
             RelationManagers\OthersRelationManager::class,
-            RelationManagers\DocumentationsRelationManager::class,
             RelationManagers\OtherNotesRelationManager::class,
+            RelationManagers\DocumentationsRelationManager::class,
         ];
     }
 

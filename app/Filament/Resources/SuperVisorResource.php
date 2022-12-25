@@ -23,11 +23,11 @@ class SuperVisorResource extends Resource
 
     protected static ?string $slug = 'pengawas';
 
-    protected static ?string $modelLabel = 'Pengawas';
+    protected static ?string $modelLabel = 'PPK dan Pengawas DPUPR';
 
-    protected static ?string $pluralModelLabel = 'Pengawas';
+    protected static ?string $pluralModelLabel = 'PPK dan Pengawas DPUPR';
 
-    protected static ?string $navigationLabel = 'Pengawas';
+    protected static ?string $navigationLabel = 'PPK dan Pengawas DPUPR';
 
     protected static ?string $navigationGroup = 'Master Data';
 
