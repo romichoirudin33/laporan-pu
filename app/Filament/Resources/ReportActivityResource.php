@@ -88,7 +88,7 @@ class ReportActivityResource extends Resource
                     ->searchable(),
                 TextColumn::make('work_date')
                     ->label('Tanggal')
-                    ->formatStateUsing(fn (string $state): string => $state == null ? '' : date('d M Y', strtotime($state)))
+                    ->formatStateUsing(fn (?string $state): string => $state == null ? '' : date('d M Y', strtotime($state)))
                     ->alignCenter(true)
                     ->searchable(),
                 TextColumn::make('fiscal_year')
